@@ -1,0 +1,415 @@
+/* ==========================================================================
+   Blaburring — stylesheet
+   A dreamy, night-sky journal for Kavitha Arumugam's poems.
+
+   Theme:
+   --ink     : deepest background
+   --twilight: card / mid background
+   --cream   : primary text (moonlight)
+   --lavender: secondary text
+   --blush   : accent (warmth, the recurring "love/heart" imagery)
+   --gold    : accent (the moon / stars imagery)
+   ========================================================================== */
+
+:root {
+  --ink: #14122a;
+  --twilight: #221f44;
+  --twilight-soft: #2c2856;
+  --cream: #f6efe4;
+  --lavender: #b9aed8;
+  --blush: #f0b8c4;
+  --gold: #f3d9a4;
+
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Nunito Sans", "Nunito", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--cream);
+  background: radial-gradient(
+      120% 80% at 50% 0%,
+      var(--twilight-soft) 0%,
+      transparent 60%
+    ),
+    linear-gradient(165deg, var(--ink) 0%, var(--twilight) 60%, #1c1840 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.app {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 6rem 1.5rem 4rem;
+  overflow: hidden;
+}
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.hero__orb--one {
+  width: 22rem;
+  height: 22rem;
+  background: var(--blush);
+  top: -6rem;
+  left: -6rem;
+  animation: drift 20s var(--ease-soft) infinite alternate;
+}
+
+.hero__orb--two {
+  width: 18rem;
+  height: 18rem;
+  background: var(--gold);
+  bottom: -5rem;
+  right: -5rem;
+  animation: drift 26s var(--ease-soft) infinite alternate-reverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(2.5rem, 2rem) scale(1.18);
+  }
+}
+
+.hero__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease-soft) 0.9s forwards;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(3.25rem, 4rem + 6vw, 7.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  background: linear-gradient(
+    135deg,
+    var(--cream) 0%,
+    var(--blush) 55%,
+    var(--gold) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  filter: blur(26px);
+  transform: translateY(1.5rem) scale(1.04);
+  animation: blurIn 1.6s var(--ease-soft) 0.15s forwards;
+}
+
+@keyframes blurIn {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero__tagline {
+  margin: 1.25rem 0 0.35rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.4rem);
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease-soft) 1.1s forwards;
+}
+
+.hero__byline {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.9rem);
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease-soft) 1.3s forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.9rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 1.6rem;
+  height: 2.6rem;
+  border: 2px solid var(--lavender);
+  border-radius: 999px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease-soft) 1.6s forwards;
+  text-decoration: none;
+}
+
+.hero__scroll-dot {
+  display: block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: scrollDot 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(0.9rem);
+    opacity: 0.35;
+  }
+}
+
+/* ==========================================================================
+   Moon phase (decorative)
+   ========================================================================== */
+
+.moon-phase {
+  --moon-size: 2.25rem;
+  position: relative;
+  width: var(--moon-size);
+  height: var(--moon-size);
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 1.25rem rgba(243, 217, 164, 0.35);
+  overflow: hidden;
+}
+
+.moon-phase--sm {
+  --moon-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.moon-phase__shadow {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  background: var(--twilight);
+  transition: transform 1.2s var(--ease-soft);
+}
+
+/* ==========================================================================
+   Poem list & cards
+   ========================================================================== */
+
+.poem-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 1.25rem clamp(4rem, 10vw, 7rem);
+}
+
+.poem-card {
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 0 clamp(2.5rem, 7vw, 5rem);
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 5vw, 3.5rem);
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(243, 217, 164, 0.12);
+  border-radius: 1.5rem;
+  box-shadow: 0 1.5rem 4rem -2rem rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(4.5rem);
+  transition: opacity 0.9s var(--ease-soft), filter 0.9s var(--ease-soft),
+    transform 0.9s var(--ease-soft);
+}
+
+.poem-card--visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.poem-card__title {
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.3;
+  color: var(--gold);
+}
+
+.poem-card__title-line {
+  display: block;
+}
+
+.poem-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.poem-card__stanza {
+  margin: 0;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  line-height: 1.95;
+}
+
+.poem-card__line {
+  display: block;
+}
+
+.poem-card__note {
+  margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 0.9rem + 0.3vw, 1.2rem);
+  color: var(--lavender);
+}
+
+.poem-card__signature {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  font-family: var(--font-script);
+  font-size: clamp(1.35rem, 1.15rem + 1vw, 1.85rem);
+  color: var(--blush);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  text-align: center;
+  padding: 0 1.5rem clamp(4rem, 10vw, 7rem);
+}
+
+.footer__text {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--lavender);
+  font-size: 1rem;
+}
+
+.footer__signature {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  color: var(--gold);
+}
+
+/* ==========================================================================
+   Responsive tweaks
+   ========================================================================== */
+
+@media (max-width: 420px) {
+  .hero {
+    padding: 5rem 1.25rem 3.5rem;
+  }
+
+  .poem-card {
+    border-radius: 1.1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero__title,
+  .hero__eyebrow,
+  .hero__tagline,
+  .hero__byline,
+  .hero__scroll,
+  .hero__scroll-dot,
+  .hero__orb,
+  .poem-card,
+  .moon-phase__shadow {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
